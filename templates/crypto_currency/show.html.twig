@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ crypto.name }} Details{% endblock %}
+
+{% block body %}
+    <h1>{{ crypto.name }} ({{ crypto.symbol | upper }})</h1>
+    
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">Symbol</th>
+                <td>{{ crypto.symbol }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Current Price</th>
+                <td>${{ crypto.currentPrice }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total Volume</th>
+                <td>{{ crypto.totalVolume }}</td>
+            </tr>
+            <tr>
+                <th scope="row">All-Time High (ATH)</th>
+                <td>${{ crypto.ath }} on {{ crypto.athDate | date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th scope="row">All-Time Low (ATL)</th>
+                <td>${{ crypto.atl }} on {{ crypto.atlDate | date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Last Updated</th>
+                <td>{{ crypto.updatedAt | date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="/api/crypto-currencies">
+        Go Back
+        </a>
+    </div>
+{% endblock %}
