@@ -23,8 +23,8 @@ class CryptoCurrency
     #[ORM\Column]
     private float $currentPrice;
 
-    #[ORM\Column]
-    private int $totalVolume;
+    #[ORM\Column(type: 'bigint')]
+    private string $totalVolume;
 
     #[ORM\Column]
     private float $ath;
@@ -82,12 +82,12 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getTotalVolume(): int
+    public function getTotalVolume(): string
     {
         return $this->totalVolume;
     }
 
-    public function setTotalVolume(int $totalVolume): static
+    public function setTotalVolume(string $totalVolume): static
     {
         $this->totalVolume = $totalVolume;
 
