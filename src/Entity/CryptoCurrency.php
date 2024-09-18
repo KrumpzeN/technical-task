@@ -12,41 +12,41 @@ class CryptoCurrency
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(length: 16)]
-    private ?string $symbol = null;
+    private string $symbol;
 
     #[ORM\Column]
-    private ?float $currentPrice = null;
+    private float $currentPrice;
 
     #[ORM\Column]
-    private ?int $totalVolume = null;
+    private int $totalVolume;
 
     #[ORM\Column]
-    private ?float $ath = null;
+    private float $ath;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $athDate = null;
+    private \DateTimeInterface $athDate;
 
     #[ORM\Column]
-    private ?float $atl = null;
+    private float $atl;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $atlDate = null;
+    private \DateTimeInterface $atlDate;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updatedAt = null;
+    private \DateTimeInterface $updatedAt;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -58,7 +58,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getSymbol(): ?string
+    public function getSymbol(): string
     {
         return $this->symbol;
     }
@@ -70,7 +70,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getCurrentPrice(): ?float
+    public function getCurrentPrice(): float
     {
         return $this->currentPrice;
     }
@@ -82,7 +82,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getTotalVolume(): ?int
+    public function getTotalVolume(): int
     {
         return $this->totalVolume;
     }
@@ -94,7 +94,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getAth(): ?float
+    public function getAth(): float
     {
         return $this->ath;
     }
@@ -106,7 +106,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getAthDate(): ?\DateTimeInterface
+    public function getAthDate(): \DateTimeInterface
     {
         return $this->athDate;
     }
@@ -118,7 +118,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getAtl(): ?float
+    public function getAtl(): float
     {
         return $this->atl;
     }
@@ -130,7 +130,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getAtlDate(): ?\DateTimeInterface
+    public function getAtlDate(): \DateTimeInterface
     {
         return $this->atlDate;
     }
@@ -142,7 +142,7 @@ class CryptoCurrency
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }

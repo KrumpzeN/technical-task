@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if message %}
+        Filtered Cryptocurrencies
+    {% else %}
+        All Cryptocurrencies
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">
+        Filtered Cryptocurrencies
+    </h1>
+
+    {% if message %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="get" action="{{ path('api_crypto_currency_min_max') }}" class="mb-4">
+        <div class="form-group">
+            <label for="min-price">Min Price</label>
+            <input type="number" step="0.01" name="min" id="min-price" value="{{ min }}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="max-price">Max Price</label>
+            <input type="number" step="0.01" name="max" id="max-price" value="{{ max }}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Current Price</th>
+                <th>Total Volume</th>
+                <th>ATH</th>
+                <th>ATL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for crypto in cryptos %}
+                <tr>
+                    <td>{{ crypto.name }}</td>
+                    <td>
+                        <a href="{{ path('api_crypto_currency_show', { symbol: crypto.symbol }) }}">
+                            {{ crypto.symbol | upper }}
+                        </a>
+                    </td>
+                    <td>${{ crypto.current_price }}</td>
+                    <td>{{ crypto.total_volume }}</td>
+                    <td>${{ crypto.ath }} ({{ crypto.ath_date }})</td>
+                    <td>${{ crypto.atl }} ({{ crypto.atl_date }})</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No cryptocurrencies found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <a href="/api/crypto-currencies">
+        Go Back
+        </a>
+    </div>
+{% endblock %}
