@@ -12,8 +12,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class CryptoCurrencyController extends AbstractController
 {
-    
-
     #[Route('/api/crypto-currency/{symbol}', name: 'api_crypto_currency_show', methods: ['GET'])]
     public function show(string $symbol, EntityManagerInterface $em, SerializerInterface $si, \Twig\Environment $twig): Response
     {
@@ -23,7 +21,9 @@ class CryptoCurrencyController extends AbstractController
             return new Response($twig->render('error.html.twig', ['message' => 'Currency not found']), 404);
         }
 
-        $cryptoData = $si->normalize($crypto, 'json');
+        $cryptoDataJson = $si->serialize($crypto, 'json');
+
+        $cryptoData = json_decode($cryptoDataJson, true);
 
         return new Response($twig->render('crypto_currency/show.html.twig', [
             'crypto' => $cryptoData
@@ -68,7 +68,9 @@ class CryptoCurrencyController extends AbstractController
                 ];
             }, $cryptos);
 
-            $cryptoData = $si->normalize($formattedCryptos, 'json');
+            $cryptoDataJson = $si->serialize($formattedCryptos, 'json');
+
+            $cryptoData = json_decode($cryptoDataJson, true);
 
             return $this->render('crypto_currency/filter.html.twig', [
                 'cryptos' => $cryptoData,
@@ -105,7 +107,9 @@ class CryptoCurrencyController extends AbstractController
             ];
         }, $cryptos);
 
-        $cryptoData = $si->normalize($formattedCryptos, 'json');
+        $cryptoDataJson = $si->serialize($formattedCryptos, 'json');
+
+        $cryptoData = json_decode($cryptoDataJson, true);
 
         return new Response($twig->render('crypto_currency/list.html.twig', [
             'cryptos' => $cryptoData
